@@ -1,153 +1,117 @@
-
+<!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Sevgiliye</title>
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #fbc2eb, #a6c1ee);
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    position: relative;
-  }
-
-  /* Uçuşan kalpler */
-  .hearts {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 0;
-  }
-
-  .heart {
-    position: absolute;
-    top: -50px;
-    font-size: 24px;
-    animation: floatUp 10s linear forwards;
-    opacity: 0.8;
-  }
-
-  @keyframes floatUp {
-    0% {
-      transform: translateY(0) scale(1);
-      opacity: 0.8;
+  <meta charset="UTF-8">
+  <title>Affet Beni</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #ffdde1, #ee9ca7);
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
     }
-    100% {
-      transform: translateY(-110vh) scale(0.5);
-      opacity: 0;
+
+    h1 {
+      margin-top: 80px;
+      font-size: 28px;
+      padding: 0 20px;
     }
-  }
 
-  /* İçerik kutusu */
-  .container {
-    position: relative;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 20px 40px;
-    border-radius: 15px;
-    max-width: 700px;
-    text-align: center;
-    z-index: 1;
-  }
+    .buttons {
+      margin-top: 40px;
+    }
 
-  h1 {
-    margin-bottom: 20px;
-  }
+    button {
+      padding: 12px 24px;
+      margin: 10px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-  /* Yazı alanı boş bırakıldı */
-  .message {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-    min-height: 150px;
-  }
+    .yes {
+      background-color: #4caf50;
+      color: white;
+    }
 
-  /* Butonlar */
-  .buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
+    .no {
+      background-color: #f44336;
+      color: white;
+    }
 
-  button {
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
-    border: none;
-    border-radius: 8px;
-    background-color: #ff69b4;
-    color: white;
-    transition: background-color 0.3s;
-  }
+    .result {
+      margin-top: 40px;
+      font-size: 20px;
+      padding: 0 20px;
+    }
 
-  button:hover {
-    background-color: #ff85c1;
-  }
-</style>
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/4/49/Red_heart_icon.svg') no-repeat center;
+      background-size: cover;
+      animation: float 5s infinite ease-in;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
 <body>
+  <h1>
+    Senin için ben bir ömür uğraşırım prensesim benim,<br>
+    bu ahmaklığımı nolursun affet...<br>
+    Affeder misin?
+  </h1>
 
-<div class="hearts" id="hearts"></div>
-
-<div class="container">
-  <h1>Senin için ben bir ömür uğraşırım prensesim benim,<br/> bu ahmaklığımı nolursun affet</h1>
-  <div class="message" id="message">
-    <!-- Mesaj başlangıçta boş -->
-  </div>
   <div class="buttons">
-    <button id="btnA" >Affediyorum</button>
-    <button id="btnB" >Affetmiyorum</button>
+    <button class="yes" onclick="showMessage('yes')">Affediyorum</button>
+    <button class="no" onclick="showMessage('no')">Affetmiyorum</button>
   </div>
-</div>
 
-<script>
-  // Kalpler uçuşu fonksiyonu
-  function createHeart() {
-    const heart = document.createElement('div');
-    heart.className = 'heart';
-    heart.innerHTML = '❤️';
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.fontSize = (20 + Math.random() * 20) + 'px';
-    document.getElementById('hearts').appendChild(heart);
-    setTimeout(() => {
-      heart.remove();
-    }, 10000);
-  }
+  <div class="result" id="result"></div>
 
-  // Her 300ms'de bir yeni kalp oluştur
-  setInterval(createHeart, 300);
+  <script>
+    function showMessage(choice) {
+      const result = document.getElementById('result');
+      if (choice === 'yes') {
+        result.innerHTML = `Affına sığınırım o gözlerinin altında,<br>
+        yüreğim ağlar o mahçup bakışında...<br>
+        Minnettarım sana bu aşk için,<br>
+        Tabut olsun bana gözlerin dolduğunda.`;
+      } else {
+        result.innerHTML = `Kül olur yanarım bu aşkınla,<br>
+        Sensiz ne eyleyim bu yaz akşamında...<br>
+        Kalbimin yeri doludur en ince hatıralarınla,<br>
+        Ne olur affet sevgilim o küçük parmağınla.`;
+      }
+    }
 
-  // Butonlara event listener ekle
-  const messageDiv = document.getElementById('message');
+    // Kalp oluşturma fonksiyonu
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 3 + Math.random() * 2 + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
 
-  document.getElementById('btnA').addEventListener('click', () => {
-    messageDiv.innerHTML = `
-      Affeder misin?<br/>
-      Affına sığınırım o gözlerinin altında<br/>
-      yüreğim ağlar o mahçup bakışında<br/>
-      minnettarım sana bu aşk için<br/>
-      <br/>
-      <em>Tabut olsun bana gözlerin dolduğunda</em>
-    `;
-  });
-
-  document.getElementById('btnB').addEventListener('click', () => {
-    messageDiv.innerHTML = `
-      Kül olur yanarım bu aşkınla<br/>
-      sensiz ne eyleyim bu yaz akşamında<br/>
-      kalbimin yeri doludur en ince hatıralarınla<br/>
-      ne olur affet sevgilim o küçük parmağınla
-    `;
-  });
-</script>
-
+    setInterval(createHeart, 500);
+  </script>
 </body>
 </html>
